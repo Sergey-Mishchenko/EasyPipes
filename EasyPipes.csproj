@@ -14,14 +14,15 @@
     <AssemblyVersion>1.4.0.0</AssemblyVersion>
     <FileVersion>1.4.0.0</FileVersion>
     <Version>1.4.0</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
     <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>StrongKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(MSBuildRuntimeType)'!='Core'">
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>EasyPipesKey.pfx</AssemblyOriginatorKeyFile>  
+    <AssemblyOriginatorKeyFile>StrongKey.snk</AssemblyOriginatorKeyFile>  
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -58,6 +59,12 @@
     <PackageReference Include="Castle.Core" Version="4.3.1" />
     <PackageReference Include="System.Net.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Net.Sockets" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="StrongKey.snk">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
