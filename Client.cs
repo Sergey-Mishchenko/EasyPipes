@@ -119,6 +119,11 @@ namespace EasyPipes
         }
 
         /// <summary>
+        /// Determines the waiting time for connection to the server
+        /// </summary>
+        public TimeSpan ConnectionTimeout { get; set;}
+
+        /// <summary>
         /// Connect to server. This opens a persistent connection allowing multiple remote calls
         /// until <see cref="Disconnect(bool)"/> is called.
         /// </summary>
@@ -134,7 +139,10 @@ namespace EasyPipes
 
             try
             {
-                source.Connect(500);
+                if (ConnectionTimeout <= TimeSpan.Zero)
+                    source.Connect();
+                else
+                    source.Connect((int)ConnectionTimeout.TotalMilliseconds);
             } catch(TimeoutException)
             {
                 return false;
